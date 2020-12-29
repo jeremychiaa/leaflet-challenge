@@ -1,6 +1,6 @@
 // Creating map object
 var myMap = L.map("map", {
-  center: [34.0522, -118.2437],
+  center: [0,0],
   zoom: 4
 });
 
@@ -15,13 +15,13 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(myMap);
 
 // All earthquakes in the past day
-var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
 // Colour selection
 var colours = ['#90EE90', '#FFFF00', '#fed8b1', '#FFA500', '#FF8C00', '#8B0000'];
 
 // Earthquake magnitudes
-var magnitudes = ['0-1','1-2','2-3','3-4','4-5', '5+'];
+var categories = ['0-1','1-2','2-3','3-4','4-5', '5+'];
 
 // Function to determine colour based on earthquake's magnitude
 var chooseColour = (magnitude) => {
@@ -52,7 +52,7 @@ var geojsonMarkerOptions = {
 };
 
 // Grab data with d3
-d3.json(url, (data) => {
+d3.json(link, (data) => {
 
     // Create geojson layer with retrieved data
     L.geoJson(data, {
@@ -63,7 +63,7 @@ d3.json(url, (data) => {
         style: (feature) => {
             return {
                 color: "white",
-                fillColour: chooseColour(feature.properties.mag),
+                fillColor: chooseColour(feature.properties.mag),
                 fillOpacity: 0.4,
                 weight: 1.0,
                 radius: markerSize(feature.properties.mag)
@@ -91,14 +91,14 @@ d3.json(url, (data) => {
             });
 
             // Pop up with various info on earthquake locations
-            layer.bindPopup(
-                `
-                <h4>${feature.properties.place}</h4>
-                <hr>
-                <p>Magnitude: ${feature.properties.mag}</p>
-                <p>Date: ${moment(feature.properties.time).format('DD MMM, YYYY hh:mm a')}</p>
-                `
-            );
+            // layer.bindPopup(
+            //     `
+            //     <h4>${feature.properties.place}</h4>
+            //     <hr>
+            //     <p>Magnitude: ${feature.properties.mag}</p>
+            //     <p>Date: ${moment(feature.properties.time).format('DD MMM, YYYY hh:mm a')}</p>
+            //     `
+            // );
         }
-    })
-}).addTo(map);
+    }).addTo(myMap);
+});
