@@ -91,14 +91,30 @@ d3.json(link, (data) => {
             });
 
             // Pop up with various info on earthquake locations
-            // layer.bindPopup(
-            //     `
-            //     <h4>${feature.properties.place}</h4>
-            //     <hr>
-            //     <p>Magnitude: ${feature.properties.mag}</p>
-            //     <p>Date: ${moment(feature.properties.time).format('DD MMM, YYYY hh:mm a')}</p>
-            //     `
-            // );
+            layer.bindPopup(
+                `
+                <h4>${feature.properties.place}</h4>
+                <hr>
+                <p>Magnitude: ${feature.properties.mag}</p>
+                `
+            );
         }
     }).addTo(myMap);
+
+    // Add legend
+    var legend = L.control({ position: "bottomright" });
+    legend.onAdd = function(myMap) {
+        var div = L.DomUtil.create("div", "info legend");
+        var labels = ["<strong>Magnitude</strong>"];
+
+        for (i = 0; i < categories.length; i++) {
+            div.innerHTML += labels.push(
+                `<div class="square" style="background:${colours[i]}"></div>${(categories[i] ? categories[i] : '+')}`
+            );
+        }
+
+        div.innerHTML = labels.join("<br>");
+        return div;
+    };
+    legend.addTo(myMap);
 });

@@ -8,3 +8,15 @@ body,
 html {
   height: 100%;
 }
+
+.square {
+  width: 10px;
+  height: 10px;
+  margin-top: 5px;
+}
+
+.info {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
