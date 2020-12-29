@@ -90,7 +90,15 @@ d3.json(url, (data) => {
                 },
             });
 
-            
+            // Pop up with various info on earthquake locations
+            layer.bindPopup(
+                `
+                <h4>${feature.properties.place}</h4>
+                <hr>
+                <p>Magnitude: ${feature.properties.mag}</p>
+                <p>Date: ${moment(feature.properties.time).format('DD MMM, YYYY hh:mm a')}</p>
+                `
+            );
         }
     })
 }).addTo(map);
