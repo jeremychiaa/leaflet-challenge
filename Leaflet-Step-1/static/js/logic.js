@@ -52,3 +52,45 @@ var geojsonMarkerOptions = {
 };
 
 // Grab data with d3
+d3.json(url, (data) => {
+
+    // Create geojson layer with retrieved data
+    L.geoJson(data, {
+        pointToLayer: (feature, latlng) => {
+            return L.circleMarker(latlng, geojsonMarkerOptions);
+        },
+        // Style each feature
+        style: (feature) => {
+            return {
+                color: "white",
+                fillColour: chooseColour(feature.properties.mag),
+                fillOpacity: 0.4,
+                weight: 1.0,
+                radius: markerSize(feature.properties.mag)
+            };
+        },
+
+        // Call on each feature
+        onEachFeature: (feature, layer) => {
+            // Set mouse events
+            layer.on({
+                // Mouse over event
+                mouseover: (event) => {
+                    layer = event.target;
+                    layer.setStyle({
+                        fillOpacity: 0.9
+                    });
+                },
+                // Mouse out event
+                mouseout: (event) => {
+                    layer = event.target;
+                    layer.setStyle({
+                        fillOpacity: 0.4
+                    });
+                },
+            });
+
+            
+        }
+    })
+}).addTo(map);
