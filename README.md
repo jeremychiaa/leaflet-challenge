@@ -1,49 +1,47 @@
-# leaflet-challenge - Visualizing Data with Leaflet
+# Leaflet Challenge
 
-## Background
+This repository includes a map visualization showing earthquakes from the past day using [earthquake geojson data](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson) from the United States Geological Survey. The map was built using the [Leaflet](https://leafletjs.com/) JavaScript library.
 
-![1-Logo](1-Logo.png)
+This repository includes two different levels of maps:
 
-Welcome to the United States Geological Survey, or USGS for short! The USGS is responsible for providing scientific data about natural hazards, the health of our ecosystems and environment; and the impacts of climate and land-use change. Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes. As a new hire, you will be helping them out with an exciting new project!
+## Level 1
 
-The USGS is interested in building a new set of tools that will allow them visualize their earthquake data. They collect a massive amount of data from all over the world each day, but they lack a meaningful way of displaying it. Their hope is that being able to visualize their data will allow them to better educate the public and other government organizations (and hopefully secure more funding..) on issues facing our planet.
+The first level is inside the [Leaflet-Step-1](./Leaflet-Step-1) folder of this repository. This map shows all earthquakes from the past 7 days. The data markers reflect the magnitude of the earthquake in their size and color. Earthquakes with higher magnitudes appear larger and darker in color. A legend is available to provide additional context for the map data. Clicking a marker opens a popup that includes the location, magnitude, and date for the earthquate that was clicked.
 
-## Your Task
+To run this map locally:
 
-### Level 1: Basic Visualization
+1. Download or clone this repository to a local directory on your computer.
+2. Create an account on [mapbox](https://account.mapbox.com/) and obtain a free API key.
+3. Inside the **leaflet-challenge/Leaflet-Step-1/static/js** folder, create a file called **config.js** and add the following lines to that file:
 
-Your first task is to visualize an earthquake data set.
+```bash
+// API key
+const config = {
+  API_KEY : "YOUR_API_KEY",
+}
+```
 
-1. **Get your data set**
+Replace YOUR_API_KEY with your actual api key obtained in step 2.<br>
+4. Open up the **leaflet-challenge/Leaflet-Step-1/index.html** file in Chrome using VSCode LiveServer (or another server) to see the map.
 
-   The USGS provides earthquake data in a number of different formats, updated every 5 minutes. Visit the [USGS GeoJSON Feed](http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) page and pick a data set to visualize. When you click on a data set, for example 'All Earthquakes from the Past 7 Days', you will be given a JSON representation of that data. You will be using the URL of this JSON to pull in the data for our visualization.
+## Level 2
 
-2. **Import & Visualize the Data**
+The second level is inside the [Leaflet-Step-2](./Leaflet-Step-2) folder of this repository. This map includes the same features and shows the same data as level 1 but also includes a second data set to illustrate the relationship between tectonic plates and seismic activity. The data for the tectonic plates was obtained from [here](https://github.com/fraxen/tectonicplates).
 
-   Create a map using Leaflet that plots all of the earthquakes from your data set based on their longitude and latitude.
+This map includes three base maps you can choose from in the upper right corner of the map (satellite, grayscale, and outdoors). The map also includes 2 overlay maps that you can toggle on and off (earthquakes and fault lines). And just like level 1, each marker reflects the magnitude of the earthquake in size and color.
 
-   * Your data markers should reflect the magnitude of the earthquake in their size and color. Earthquakes with higher magnitudes should appear larger and darker in color.
+To run this map locally:
 
-   * Include popups that provide additional information about the earthquake when a marker is clicked.
+1. Download or clone this repository to a local directory on your computer.
+2. Create an account on [mapbox](https://account.mapbox.com/) and obtain a free API key (or use the same api key used for the level 1 map).
+3. Inside the **leaflet-challenge/Leaflet-Step-2/static/js** folder, create a file called **config.js** and add the following lines to that file:
 
-   * Create a legend that will provide context for your map data.
+```bash
+// API key
+const config = {
+  API_KEY : "YOUR_API_KEY",
+}
+```
 
-- - -
-
-### Level 2: More Data
-
-The USGS wants you to plot a second data set on your map to illustrate the relationship between tectonic plates and seismic activity. You will need to pull in a second data set and visualize it along side your original set of data. Data on tectonic plates can be found at <https://github.com/fraxen/tectonicplates>.
-
-In this step we are going to..
-
-* Plot a second data set on our map.
-
-* Add a number of base maps to choose from as well as separate out our two different data sets into overlays that can be turned on and off independently.
-
-* Add layer controls to our map.
-
-- - -
-
-### Copyright
-
-Trilogy Education Services © 2019. All Rights Reserved.
+Replace YOUR_API_KEY with your actual api key obtained in step 2.<br>
+4. Open up the **leaflet-challenge/Leaflet-Step-2/index.html** file in Chrome using VSCode LiveServer (or another server) to see the map.
